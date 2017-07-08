@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using KodKod;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +23,13 @@ namespace KodKodSample
         {
             var document = OpenApiParser.Parse(Path.Combine(Directory.GetCurrentDirectory(), "openapi.yaml"));
 
-            services.AddMvc().AddMvcOptions(options => options.Conventions.Add(new OpenApiConvention(document)));
+            services
+                .AddMvcCore(options =>
+                {
+                    options.Conventions.Add(new OpenApiConvention(document))
+                })
+                .AddJsonFormatters(options => options.Formatting = Formatting.Indented)
+                .AddApiExplorer();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

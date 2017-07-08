@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <Description>
-    Hello, world!
+      Hello, world!
     </Description>
     <TargetFramework>netstandard2.0</TargetFramework>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.0-*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.0.0-*" />
     <PackageReference Include="YamlDotNet.Signed" Version="4.2.1" />
   </ItemGroup>
+
 </Project>

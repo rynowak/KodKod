@@ -13,7 +13,7 @@ namespace KodKodSample.Controllers
         }
 
         [HttpGet("{id}")]
-        public Pet Get(int id)
+        public Result<Pet> Get(int id)
         {
             return new Pet();
         }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\KodKod.Core\KodKod.Core.csproj" />
+    <ProjectReference Include="..\..\src\KodKod.Runtime\KodKod.Runtime.csproj" />s
   </ItemGroup>
   
   <ItemGroup>
