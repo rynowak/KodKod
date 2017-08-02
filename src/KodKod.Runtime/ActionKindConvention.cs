@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KodKod.Core
+namespace KodKod.Runtime
 {
-    public class ApiExplorerSettingsConvention
+    class ActionKindConvention
     {
     }
 }

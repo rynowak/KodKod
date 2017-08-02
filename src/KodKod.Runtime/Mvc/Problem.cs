@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 using Newtonsoft.Json;
 
-namespace KodKod.Runtime
+namespace Microsoft.AspNetCore.Mvc
 {
     public class Problem
     {
