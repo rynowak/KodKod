@@ -34,7 +34,7 @@ namespace KodKodSample
         }
 
         [HttpGet("findByStatus")]
-        public ActionResult FindByStatus([FromQuery] Status status)
+        public ActionResult<IEnumerable<Pet>> FindByStatus([FromQuery] Status status)
         {
             if (!ModelState.IsValid)
             {
@@ -45,7 +45,7 @@ namespace KodKodSample
         }
 
         [HttpGet("findByTags")]
-        public ActionResult FindByTags([FromQuery] string[] tags)
+        public ActionResult<IEnumerable<Pet>> FindByTags([FromQuery] string[] tags)
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace KodKodSample
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get([FromRoute] int id)
+        public ActionResult<Pet> Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {

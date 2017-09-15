@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -17,6 +18,10 @@ namespace KodKodSample
             })
             .AddJsonFormatters(options => options.Formatting = Formatting.Indented)
             .AddApiExplorer();
+
+            services.Remove(services.Where(s => s.ServiceType == typeof(IApiDescriptionProvider) && s.ImplementationType.Name == "DefaultApiDescriptionProvider").Single());
+            services.AddSingleton<IApiDescriptionProvider, KodKod.DefaultApiDescriptionProvider>();
+            services.AddSingleton<IApiDescriptionProvider, KodKod.ProblemDetailsApiDescriptionProvider>();
 
             services.AddSwaggerGen(options =>
             {
