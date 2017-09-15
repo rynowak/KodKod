@@ -6,32 +6,85 @@ namespace KodKodSample
     [Route("pet")]
     public class PetController : Controller
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<Pet>> Get()
+        [HttpPost]
+        public ActionResult Post([FromBody] Pet pet)
         {
-            return new Pet[] { };
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Pet> Get([FromRoute] int id)
+        [HttpPut]
+        public ActionResult Put([FromBody] Pet pet)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (pet.Id == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        [HttpGet("findByStatus")]
+        public ActionResult FindByStatus([FromQuery] Status status)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
+
+        [HttpGet("findByTags")]
+        public ActionResult FindByTags([FromQuery] string[] tags)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute] int id, [FromHeader(Name = "api_key")] string apiKey)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id == 0)
             {
                 return NotFound();
             }
 
-            return new Pet();
+            return Ok();
         }
 
-        [HttpPost]
-        public ActionResult<Pet> Post([FromBody] Pet pet)
+        [HttpGet("{id}")]
+        public ActionResult Get([FromRoute] int id)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return CreatedAtAction("Get", new { id = pet.Id, }, pet);
+                return BadRequest(ModelState);
             }
 
-            return BadRequest(ModelState);
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
     }
 
