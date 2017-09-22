@@ -1,0 +1,32 @@
+﻿<Project>
+  <PropertyGroup>
+    <KodKodOutputDirectory>$(MSBuildProjectDirectory)\wwwroot\</KodKodOutputDirectory>
+    <KodKodSwaggerJson>$(KodKodOutputDirectory)$(AssemblyName).swagger.json</KodKodSwaggerJson>
+  </PropertyGroup>
+
+  <Target Name="_KodKod" AfterTargets="Build" DependsOnTargets="KodKodAbc" />
+
+  <Target Name="KodKodAbc" DependsOnTargets="RunForCore;RunForDesktop" />
+
+  <Target Name="RunForCore" Condition="'$(TargetFrameworkIdentifier)'=='.NETCoreApp'">
+    <PropertyGroup>
+      <_KodKodExe Condition="'$(_KodKodExe)'==''">$(MsBuildThisFileDirectory)$(MSBuildThisFileName).dll</_KodKodExe>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <_ExecArgs Include="
+          --runtimeconfig &quot;$(ProjectRuntimeConfigFilePath)&quot;;
+          --depsfile &quot;$(ProjectDepsFilePath)&quot;;
+          $(_KodKodExe);
+          --output-path=&quot;$(KodKodSwaggerJson)&quot;
+          --application-name=$(AssemblyName)" />
+    </ItemGroup>
+    <Exec Command="dotnet exec @(_ExecArgs, ' ')" />
+  </Target>
+
+  <Target Name="GetSwaggerFilePath" Returns="$(KodKodSwaggerJson)" />
+
+  <Target Name="RunForDesktop" Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'">
+    <Error Text="Desktop support has not been implemeted." />
+  </Target>
+</Project>

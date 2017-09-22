@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Build-time api descriptor generation.</Description>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netcoreapp2.0</TargetFrameworks>
+    <RuntimeIdentifier Condition="!$(TargetFramework.StartsWith('netcoreapp'))">win7-x64</RuntimeIdentifier>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <EnableApiCheck>false</EnableApiCheck>
+    <PackageTags>kodkod;aspnetcore</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.CommandLineUtils.Sources" Version="2.1.0-*" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.0-*" PrivateAssets="All" />
+    <PackageReference Update="Microsoft.NETCore.App" PrivateAssets="All" />
+    <PackageReference Include="NSwag.SwaggerGeneration" Version="11.7.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0-*" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build\**\*.*" Pack="true" PackagePath="%(Identity)" />
+    <None Include="$(OutputPath)netcoreapp2.0\$(AssemblyName).dll" Pack="true" PackagePath="build\netstandard2.0\$(AssemblyName).dll" />
+
+    <None Update="build\netstandard2.0\KodKod.Tool.targets" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(OS)'=='Windows_NT'">
+    <None Include="$(OutputPath)net461\win7-x64\$(AssemblyName).exe" Pack="true" PackagePath="build\netstandard2.0\$(AssemblyName)-x64.exe" />
+  </ItemGroup>
+
+</Project>

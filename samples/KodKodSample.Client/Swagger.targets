@@ -1,0 +1,20 @@
+﻿<Project>
+
+  <Target Name="KodKodGenerateClient" BeforeTargets="CoreCompile" DependsOnTargets="_PrepareKodKodGenerateClient;_ExecuteKodKodGenerateClient" />
+
+  <Target Name="_PrepareKodKodGenerateClient">
+    <Error Text="&quot;SwaggerProject&quot; not defined." Condition="$(SwaggerProject)==''"/>
+    
+    <MSBuild Projects="$(SwaggerProject)" Targets="GetSwaggerFilePath" Properties="Configuration=$(Configuration)">
+      <Output TaskParameter="TargetOutputs" PropertyName="KodKodSwaggerJson" />
+    </MSBuild>
+  </Target>
+
+  <Target Name="_ExecuteKodKodGenerateClient" Condition="Exists('$(KodKodSwaggerJson)')">
+    <PropertyGroup>
+      <ClientName>$([System.IO.Path]::GetFileNameWithoutExtension('$(SwaggerProject)'))Client</ClientName>
+    </PropertyGroup>
+    
+    <Exec Command="$(NSwagExe_Core20) swagger2csclient /namespace:$(RootNamespace) /input:$(KodKodSwaggerJson) /classname:$(ClientName) /output:$(ClientName).Generated.cs " />
+  </Target>
+</Project>

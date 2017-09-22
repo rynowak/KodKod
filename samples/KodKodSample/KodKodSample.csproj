@@ -5,6 +5,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-KodKodSample-6E9B4DFC-4826-4E38-8228-92913B44518E</UserSecretsId>
+    
   </PropertyGroup>
   
   <ItemGroup>
@@ -12,8 +13,19 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-*" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-*" />
   </ItemGroup>
+
+  <!-- For testing -->
+  <PropertyGroup>
+    <_KodKodProjectDir>..\..\tools\KodKod.Tool\</_KodKodProjectDir>
+    <_KodKodExe>$(_KodKodProjectDir)bin\$(Configuration)\netcoreapp2.0\KodKod.Tool.dll</_KodKodExe>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(_KodKodProjectDir)KodKod.Tool.csproj" />
+  </ItemGroup>
+
+  <Import Project="$(_KodKodProjectDir)\build\netstandard2.0\KodKod.Tool.targets" />
 
 </Project>

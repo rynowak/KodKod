@@ -1,0 +1,339 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KodKodSample",
+    "version": "1.2"
+  },
+  "schemes": [],
+  "paths": {
+    "pet": {
+      "put": {
+        "tags": [],
+        "description": "KodKodSample.PetController.Put (KodKodSample)",
+        "operationId": "PutPet",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json",
+          "application/problem+json",
+          "application/problem+xml",
+          "application/problem+json",
+          "application/problem+xml"
+        ],
+        "parameters": [
+          {
+            "type": "object",
+            "name": "pet",
+            "in": "body",
+            "x-schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "pet/findByStatus": {
+      "get": {
+        "tags": [],
+        "description": "KodKodSample.PetController.FindByStatus (KodKodSample)",
+        "operationId": "PetFindByStatus",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json",
+          "application/problem+json",
+          "application/problem+xml",
+          "application/problem+json",
+          "application/problem+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "x-schema": {
+              "$ref": "#/definitions/Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "pet/findByTags": {
+      "get": {
+        "tags": [],
+        "description": "KodKodSample.PetController.FindByTags (KodKodSample)",
+        "operationId": "PetFindByTags",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json",
+          "application/problem+json",
+          "application/problem+xml",
+          "application/problem+json",
+          "application/problem+xml"
+        ],
+        "parameters": [
+          {
+            "type": "array",
+            "name": "tags",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "pet/{id}": {
+      "get": {
+        "tags": [],
+        "description": "KodKodSample.PetController.Get (KodKodSample)",
+        "operationId": "GetPet",
+        "consumes": [],
+        "produces": [
+          "application/problem+json",
+          "application/problem+xml",
+          "application/problem+json",
+          "application/problem+xml",
+          "application/problem+json",
+          "application/problem+xml"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "404": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProblemDetails": {
+      "type": "object",
+      "description": "A machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A URI reference [RFC3986] that identifies the problem type. This specification encourages that, when\ndereferenced, it provide human-readable documentation for the problem type\n(e.g., using HTML [W3C.REC-html5-20141028]).  When this member is not present, its value is assumed to be\n\"about:blank\"."
+        },
+        "Title": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A short, human-readable summary of the problem type.It SHOULD NOT change from occurrence to occurrence\nof the problem, except for purposes of localization(e.g., using proactive content negotiation;\nsee[RFC7231], Section 3.4)."
+        },
+        "Status": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The HTTP status code([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.",
+          "format": "int32"
+        },
+        "Detail": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A human-readable explanation specific to this occurrence of the problem."
+        },
+        "Instance": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A URI reference that identifies the specific occurrence of the problem.It may or may not yield further information if dereferenced."
+        }
+      }
+    },
+    "Pet": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Category": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/Category"
+            }
+          ]
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "PhotoUrls": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "Tags": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "Status": {
+          "$ref": "#/definitions/Status"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "Status": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Available",
+        "Pending",
+        "Sold"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {}
+}
